@@ -16,7 +16,7 @@ CREATE TABLE `exceptional_programs` (
   `epr_date` date NOT NULL,
   `epr_start` time NOT NULL,
   `epr_end` time NOT NULL,
-  `epr_program_entry_id` int(11) NOT NULL
+  `epr_program_entry_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Holds the exceptional program informations';
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ CREATE TABLE `exceptional_programs` (
 
 CREATE TABLE `program_entries` (
   `pen_id` int(11) NOT NULL,
-  `pen_title` int(11) NOT NULL,
+  `pen_title` varchar(255) NOT NULL,
   `pen_parameters` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Holds program entries information (and parameters)';
 
@@ -42,7 +42,7 @@ CREATE TABLE `template_programs` (
   `tpr_day` smallint(6) NOT NULL,
   `tpr_start` time NOT NULL,
   `tpr_end` time NOT NULL,
-  `tpr_program_entry_id` int(11) NOT NULL
+  `tpr_program_entry_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='The templates programs for normal program';
 
 -- --------------------------------------------------------
@@ -55,6 +55,8 @@ CREATE TABLE `tracks` (
   `tra_id` int(11) NOT NULL,
   `tra_url` varchar(255) NOT NULL,
   `tra_title` varchar(255) NOT NULL,
+  `tra_author` varchar(255) NOT NULL,
+  `tra_album` varchar(255) NOT NULL,
   `tra_duration` int(11) NOT NULL,
   `tra_genres` varchar(2048) NOT NULL,
   `tra_free` tinyint(4) NOT NULL DEFAULT '0'
@@ -108,8 +110,18 @@ ALTER TABLE `template_programs`
 --
 ALTER TABLE `tracks`
   ADD PRIMARY KEY (`tra_id`),
+  ADD UNIQUE KEY `tra_url` (`tra_url`),
   ADD KEY `tra_genres` (`tra_genres`(767)),
-  ADD KEY `tra_free` (`tra_free`);
+  ADD KEY `tra_free` (`tra_free`),
+  ADD KEY `tra_album` (`tra_album`),
+  ADD KEY `tra_author` (`tra_author`),
+  ADD KEY `tra_title` (`tra_title`);
+
+--
+-- Index pour la table `track_logs`
+--
+ALTER TABLE `track_logs`
+  ADD PRIMARY KEY (`tlo_id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -135,3 +147,8 @@ ALTER TABLE `template_programs`
 --
 ALTER TABLE `tracks`
   MODIFY `tra_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `track_logs`
+--
+ALTER TABLE `track_logs`
+  MODIFY `tlo_id` int(11) NOT NULL AUTO_INCREMENT;
