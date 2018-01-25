@@ -37,7 +37,7 @@ $trackBo = new TrackBo($connection, $config);
 $trackLogBo = new TrackLogBo($connection, $config);
 
 $filters = array();
-$filters["epr_day"] = $date;
+$filters["epr_date"] = $date;
 $filters["epr_between_time"] = $time;
 $program = $exceptionalProgramBo->getByFilters($filters);
 
@@ -72,10 +72,12 @@ foreach($tracks as $track) {
 $data["durationOfTracks"] = $duration;
 
 if (count($tracks)) {
-	$trackRandomIndex = mt_rand(0 , count($tracks) - 1);
+	$trackRandomIndex = mt_rand(0 , count($tracks) * count($tracks) -1);
+	$trackRandomIndex = sqrt($trackRandomIndex);
+	$trackRandomIndex = count($tracks) - floor($trackRandomIndex) - 1;
 
 	$data["track"] = $tracks[$trackRandomIndex];
-	
+
 	$log = array();
 	$log["tlo_datetime"] = $data["datetime"];
 	$log["tlo_track_id"] = $data["track"]["tra_id"];

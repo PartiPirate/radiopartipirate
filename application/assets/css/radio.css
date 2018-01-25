@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+    
+body {
+	background: #fff;
+	color: #252525;
+	font-family: Ubuntu,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-size: 14px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	-x-system-font: none;
+	font-weight: 300;
+	line-height: 1.25em;
+}
+
+/* =Structure
+----------------------------------------------- */
+body {
+	padding: 0 0em;
+}
+
+#page {
+	padding: 5 10px;
+	position: relative;
+	margin: 0em auto;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align:justify;
+	width: 97%;
+	max-width: 1200px;
+}
+
+#semaine {
+	padding: 10px;
+	margin: 0em auto;
+	text-align:center;
+}
+
+#tableau {
+	padding: 5 10px;
+	margin: auto;
+	text-align:center;
+}
+
+table tbody tr:nth-child(even) {
+    background: #CCC
+}
+
+table tbody tr:nth-child(odd) {
+    background: #FFF
+}
+
+.now {
+	position: absolute;
+    width: calc(100% / 7 - 20px);
+    height: 3px;
+    background: #69DDB2;
+    border: 1px solid black;
+}
+
+.template {
+    background: #EEE;
+}
+
+.exceptional {
+    background: #FFC864;
+}
+
+.pirate {
+    background: #C89AE4;
+}
+
+.electro {
+    background: #69B2DD;
+}
+
+.rock {
+    background: #C97575;
+}

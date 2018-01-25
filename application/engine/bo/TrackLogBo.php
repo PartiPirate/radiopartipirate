@@ -70,6 +70,19 @@ class TrackLogBo {
 		$queryBuilder->select($this->TABLE);
 		$queryBuilder->setDistinct();
 		$queryBuilder->addSelect($this->TABLE . ".*");
+		$queryBuilder->addSelect("tracks.*");
+
+		if ($filters && isset($filters["with_tracks"])) {
+			$queryBuilder->join("tracks", "tra_id = tlo_track_id");
+		}
+
+		if ($filters && isset($filters["tlo_from_datetime"])) {
+			$args["tlo_from_datetime"] = $filters["tlo_from_datetime"];
+			$queryBuilder->where("tlo_datetime <= :tlo_from_datetime");
+			$queryBuilder->where("DATE_ADD(tlo_datetime, INTERVAL tra_duration SECOND) >= :tlo_from_datetime");
+		}
+
+		$queryBuilder->orderDESCBy("tlo_datetime");
 
 		$query = $queryBuilder->constructRequest();
 		$statement = $this->pdo->prepare($query);

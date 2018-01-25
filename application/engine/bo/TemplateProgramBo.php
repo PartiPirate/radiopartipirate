@@ -83,6 +83,9 @@ class TemplateProgramBo {
 			$queryBuilder->where(":tpr_between_time BETWEEN tpr_start AND tpr_end ");
 		}
 
+		$queryBuilder->orderASCBy("tpr_day");
+		$queryBuilder->orderASCBy("tpr_start");
+
 		$query = $queryBuilder->constructRequest();
 		$statement = $this->pdo->prepare($query);
 //		echo showQuery($query, $args);
