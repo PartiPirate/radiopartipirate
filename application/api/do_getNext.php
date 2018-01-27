@@ -76,7 +76,19 @@ if (count($tracks)) {
 	$trackRandomIndex = sqrt($trackRandomIndex);
 	$trackRandomIndex = count($tracks) - floor($trackRandomIndex) - 1;
 
-	$data["track"] = $tracks[$trackRandomIndex];
+	$track = $tracks[$trackRandomIndex];
+    if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+	    $track["tra_title"] = utf8_decode($track["tra_title"]);
+    }
+    if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+    	$track["tra_author"] = utf8_decode($track["tra_author"]);
+    }
+    if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+	    $track["tra_album"] = utf8_decode($track["tra_album"]);
+    }
+	$track["tra_duration_time"] = $trackBo->getTimeString($track["tra_duration"]);
+
+	$data["track"] = $track;
 
 	$log = array();
 	$log["tlo_datetime"] = $data["datetime"];

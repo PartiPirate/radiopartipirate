@@ -79,3 +79,7 @@ table tbody tr:nth-child(odd) {
 .rock {
     background: #C97575;
 }
+
+.text-right {
+	text-align: right;
+}

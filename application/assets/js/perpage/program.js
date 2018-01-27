@@ -42,7 +42,7 @@ function getDuration(time) {
     time = (time - seconds) / 60;
     var minutes = time % 60;
     time = (time - minutes) / 60;
-    var hours = time / 60;
+    var hours = time;
 
 	var string = ((hours > 0) ? ((hours < 10) ? "0" : "") + hours + ":" : "") + ((minutes < 10) ? "0" : "") + minutes + ":" + ((seconds < 10) ? "0" : "") + seconds;
 

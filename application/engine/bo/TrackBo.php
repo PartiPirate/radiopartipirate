@@ -102,7 +102,7 @@ class TrackBo {
 		$filters = array();
 
 		if (isset($parameters["music"])) {
-			if ($parameters["filter"] == "no" || $parameters["filter"] == "false") return array();
+			if ($parameters["music"] == "no" || $parameters["music"] == "false") return array();
 		}
 		else if (isset($parameters["track"])) {
 			$filters["tra_id"] = $parameters["track"];
@@ -114,7 +114,7 @@ class TrackBo {
 			}
 			
 			if (isset($parameters["filter"]["genres"])) {
-				$filters["tra_genres"] = $parameters["filter"]["genres"];
+				$filters["tra_like_genres"] = $parameters["filter"]["genres"];
 			}
 
 			if (isset($parameters["filter"]["maxDuration"])) {
@@ -126,6 +126,8 @@ class TrackBo {
 			}
 
 		}
+
+//		print_r($filters);
 
 		$noReplayInterval = "P0DT" . $noReplayTime . "H";
 

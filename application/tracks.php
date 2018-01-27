@@ -52,6 +52,7 @@ table tbody tr:nth-child(odd) {
 }
         
     </style>
+	<link rel="stylesheet" type="text/css" media="all" href="assets/css/radio.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="assets/css/datatables.min.css" />
 	<script src="assets/js/jquery-3.3.1.min.js"></script>
 	<script src="assets/js/datatables.min.js"></script>
@@ -62,7 +63,7 @@ table tbody tr:nth-child(odd) {
 <a href="track.php">Ajouter une piste</a><br>
 <br>
 
-<table id="tracks" class="display" cellspacing="0">
+<table id="tracks" class="display hover order-column" cellspacing="0">
     <thead>
         <tr>
             <th>Titre</th>
@@ -77,7 +78,7 @@ table tbody tr:nth-child(odd) {
     </thead>
     <tbody>
 <?php   
-        $duration = 0;
+/*        $duration = 0;
 
         foreach($tracks as $index => $track) {    
             $duration += $track["tra_duration"];
@@ -91,11 +92,11 @@ table tbody tr:nth-child(odd) {
             <td style="text-align: right;"><?php echo $track["tra_last_broadcast"]; ?></td>
             <td style="text-align: right;"><?php echo $track["tra_number_of_broadcasts"]; ?></td>
             <td style="text-align: right;">
-                <a href="track.php?id=<?php echo $track["tra_id"]; ?>">Éditer</a>
+                <a href="track.php?id=<?php echo $track["tra_id"]; ?>" class="modify-link">Éditer</a>
                 <a href="do_deleteTrack.php?id=<?php echo $track["tra_id"]; ?>">Supprimer</a>
             </td>
         </tr>
-<?php   }    ?>
+<?php   }    */?>
     </tbody>
     <tfoot>
         <tr>
@@ -123,60 +124,9 @@ table tbody tr:nth-child(odd) {
     </tfoot>
 </table>
 
-<script>
+<div id="track-div"></div>
 
-/* global $ */
-
-$(function() {
-    $('#tracks tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Chercher dans '+title+'" />' );
-    } );
- 
-    // DataTable
-    var table = $('#tracks').DataTable({
-        "order": [[6, "asc"], [0, "asc"]],
-        "language": {
-            "decimal":        ",",
-            "emptyTable":     "Aucune piste disponible",
-            "info":           "De _START_ à _END_ des _TOTAL_ pistes",
-            "infoEmpty":      "De 0 à 0 des 0 pistes",
-            "infoFiltered":   "(filtrées à partir des _MAX_ pistes)",
-            "infoPostFix":    "",
-            "thousands":      " ",
-            "lengthMenu":     "Montrer _MENU_ pistes",
-            "loadingRecords": "Chargement...",
-            "processing":     "Traitement...",
-            "search":         "Recherche:",
-            "zeroRecords":    "Aucune piste trouvée",
-            "paginate": {
-                "first":      "Première",
-                "last":       "Dernière",
-                "next":       "Suivante",
-                "previous":   "Précédente"
-            },
-            "aria": {
-                "sortAscending":  ": activer pour ordonner la colonne de manière ascendante",
-                "sortDescending": ": activer pour ordonner la colonne de manière descendante"
-            }
-        }
-    });
- 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
- 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );    
-    
-});
-</script>
+<script src="assets/js/perpage/tracks.js"></script>
 
 </body>    
 </html>

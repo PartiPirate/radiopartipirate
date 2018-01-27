@@ -55,7 +55,18 @@ else {
     $searchTrack = $trackBo->onlineSearch($track["tra_title"]);
 }
 
-?><!doctype html>
+if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+    $track["tra_title"] = utf8_decode($track["tra_title"]);
+}
+if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+	$track["tra_author"] = utf8_decode($track["tra_author"]);
+}
+if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+    $track["tra_album"] = utf8_decode($track["tra_album"]);
+}
+$track["tra_duration_time"] = $trackBo->getTimeString($track["tra_duration"]);
+
+?><?php if (!isset($_REQUEST["ajax"])) { ?><!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
@@ -66,16 +77,16 @@ else {
 
 <a href="tracks.php">Liste des pistes</a><br>
 <br>
-
+<?php } ?>
 <form action="do_saveTrack.php" method="post">
     <input type="hidden" name="id" value="<?php echo $track["tra_id"]; ?>">
-Titre :  <input type="value" name="title"  value="<?php echo utf8_encode($track["tra_title"]); ?>">  <?php if ($searchTrack && $track["tra_title"]  != $searchTrack["tra_title"])  { echo $searchTrack["tra_title"];  } ?> <br>
-Auteur : <input type="value" name="author" value="<?php echo utf8_encode($track["tra_author"]); ?>"> <?php if ($searchTrack && $track["tra_author"] != $searchTrack["tra_author"]) { echo $searchTrack["tra_author"]; } ?> <br>
-Album :  <input type="value" name="album"  value="<?php echo utf8_encode($track["tra_album"]); ?>">  <?php if ($searchTrack && $track["tra_album"]  != $searchTrack["tra_album"])  { echo $searchTrack["tra_album"];  } ?> <br>
-Genres : <input type="value" name="genres" value="<?php echo utf8_encode($track["tra_genres"]); ?>"> <?php if ($searchTrack && $track["tra_genres"] != $searchTrack["tra_genres"]) { echo $searchTrack["tra_genres"]; } ?> <br>
+Titre :  <input type="value" name="title"  value="<?php echo $track["tra_title"]; ?>">  <?php if ($searchTrack && $track["tra_title"]  != $searchTrack["tra_title"])  { echo $searchTrack["tra_title"];  } ?> <br>
+Auteur : <input type="value" name="author" value="<?php echo $track["tra_author"]; ?>"> <?php if ($searchTrack && $track["tra_author"] != $searchTrack["tra_author"]) { echo $searchTrack["tra_author"]; } ?> <br>
+Album :  <input type="value" name="album"  value="<?php echo $track["tra_album"]; ?>">  <?php if ($searchTrack && $track["tra_album"]  != $searchTrack["tra_album"])  { echo $searchTrack["tra_album"];  } ?> <br>
+Genres : <input type="value" name="genres" value="<?php echo $track["tra_genres"]; ?>"> <?php if ($searchTrack && $track["tra_genres"] != $searchTrack["tra_genres"]) { echo $searchTrack["tra_genres"]; } ?> <br>
 URL :    <input type="value" name="url"    value="<?php echo $track["tra_url"]; ?>"> <br>
-Durée :  <?php echo $trackBo->getTimeString($track["tra_duration"]); ?> <br>
-    <button type="submit">Mise à jour</button>
+Durée :  <?php echo $track["tra_duration_time"]; ?> <br>
+    <button id="save-track-button" type="submit">Mise à jour</button>
 
 <?php 
     $embedUrl = $track["tra_url"];
@@ -86,10 +97,7 @@ Durée :  <?php echo $trackBo->getTimeString($track["tra_duration"]); ?> <br>
 </div>
 
 </form>
-
-
-
-
-
+<?php   if (!isset($_REQUEST["ajax"])) { ?>
 </body>    
 </html>
+<?php   } ?>

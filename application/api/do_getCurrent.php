@@ -37,10 +37,16 @@ $filters["with_tracks"] = true;
 $trackLogs = $trackLogBo->getByFilters($filters);
 
 foreach($trackLogs as &$trackLog) {
-	$trackLog["tra_title"] = utf8_decode($trackLog["tra_title"]);
-	$trackLog["tra_author"] = utf8_decode($trackLog["tra_author"]);
-	$trackLog["tra_album"] = utf8_decode($trackLog["tra_album"]);
-	$trackLog["tra_genres"] = utf8_decode($trackLog["tra_genres"]);
+    if (!json_encode($trackLog, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+	    $trackLog["tra_title"] = utf8_decode($trackLog["tra_title"]);
+    }
+    if (!json_encode($trackLog, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+    	$trackLog["tra_author"] = utf8_decode($trackLog["tra_author"]);
+    }
+    if (!json_encode($trackLog, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+	    $trackLog["tra_album"] = utf8_decode($trackLog["tra_album"]);
+    }
+//	$trackLog["tra_duration_time"] = $trackBo->getTimeString($trackLog["tra_duration"]);
 }
 
 //print_r($trackLogs);
