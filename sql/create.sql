@@ -22,12 +22,27 @@ CREATE TABLE `exceptional_programs` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `jingles`
+--
+
+CREATE TABLE `jingles` (
+  `jin_id` bigint(20) NOT NULL,
+  `jin_type` enum('hours') NOT NULL,
+  `jin_author` varchar(255) NOT NULL,
+  `jin_url` varchar(255) NOT NULL,
+  `jin_data` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `program_entries`
 --
 
 CREATE TABLE `program_entries` (
   `pen_id` int(11) NOT NULL,
   `pen_title` varchar(255) NOT NULL,
+  `pen_class` varchar(255) NOT NULL,
   `pen_parameters` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Holds program entries information (and parameters)';
 
@@ -89,6 +104,14 @@ ALTER TABLE `exceptional_programs`
   ADD KEY `epr_program_entry_id` (`epr_program_entry_id`);
 
 --
+-- Index pour la table `jingles`
+--
+ALTER TABLE `jingles`
+  ADD PRIMARY KEY (`jin_id`),
+  ADD KEY `jin_type` (`jin_type`),
+  ADD KEY `jin_data` (`jin_data`);
+
+--
 -- Index pour la table `program_entries`
 --
 ALTER TABLE `program_entries`
@@ -121,7 +144,9 @@ ALTER TABLE `tracks`
 -- Index pour la table `track_logs`
 --
 ALTER TABLE `track_logs`
-  ADD PRIMARY KEY (`tlo_id`);
+  ADD PRIMARY KEY (`tlo_id`),
+  ADD KEY `tlo_track_id` (`tlo_track_id`),
+  ADD KEY `tlo_datetime` (`tlo_datetime`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -132,6 +157,11 @@ ALTER TABLE `track_logs`
 --
 ALTER TABLE `exceptional_programs`
   MODIFY `epr_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `jingles`
+--
+ALTER TABLE `jingles`
+  MODIFY `jin_id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `program_entries`
 --
