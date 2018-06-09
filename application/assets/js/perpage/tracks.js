@@ -28,6 +28,20 @@ function saveTrackHandler(e) {
     }, "text");
 }
 
+function deleteLinkHandler(e) {
+    e.preventDefault();
+    e.stopPropagation();
+        
+    var link = $(this).attr("href");
+    link += "&ajax=true";
+    
+    $.get(link, null, function(data) {
+        // update data
+        var table = $('#tracks').DataTable();
+        table.ajax.reload();
+    }, "text");
+}
+
 $(function() {
     $('#tracks tfoot th').each( function () {
         var title = $(this).text();
@@ -75,7 +89,7 @@ $(function() {
             { data: 'tra_number_of_broadcasts', className: "text-right" },
             { data: null, 
                 render: function ( data, type, row, meta ) {
-                    return '<a href="track.php?id=' + data["tra_id"] + '" class="modify-link">Éditer</a> <a href="do_deleteTrack.php?id=' + data["tra_id"] + '">Supprimer</a>';
+                    return '<a href="track.php?id=' + data["tra_id"] + '" class="modify-track-link">Éditer</a> <a href="do_deleteTrack.php?id=' + data["tra_id"] + '" class="delete-track-link">Supprimer</a>';
                 } 
             }
     ]
@@ -93,7 +107,10 @@ $(function() {
             }
         } );
     } );    
+
+    $(".add-track-link").on("click", modifyLinkHandler);
+    $("#tracks").on("click", ".modify-track-link", modifyLinkHandler);
+    $("#tracks").on("click", ".delete-track-link", deleteLinkHandler);
     
-    $("#tracks").on("click", ".modify-link", modifyLinkHandler);
     $("#track-div").on("click", "#save-track-button", saveTrackHandler);
 });

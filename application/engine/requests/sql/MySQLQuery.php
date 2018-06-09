@@ -177,6 +177,13 @@ class MySQLQuery {
         $query = "";
 
 	    $separator = "SELECT ";
+
+
+	    if ($this->distinct) {
+	    	$separator .= "DISTINCT ";
+	    }
+
+
 	    foreach($this->selects as $select) {
 	        $query .= $separator;
 

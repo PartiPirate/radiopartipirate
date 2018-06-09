@@ -60,7 +60,7 @@ table tbody tr:nth-child(odd) {
 <body>
 <img src="https://media.discordapp.net/attachments/361533120060850178/370296433431150602/banniereradioPPV18.png" style="width: 100px;"><br>
 
-<a href="track.php">Ajouter une piste</a><br>
+<a href="track.php?id=0" class="add-track-link">Ajouter une piste</a><br>
 <br>
 
 <table id="tracks" class="display hover order-column" cellspacing="0">

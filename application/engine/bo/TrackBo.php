@@ -223,7 +223,7 @@ class TrackBo {
 			$queryBuilder->join("track_logs", "tlo_track_id = tra_id", "tlo", "LEFT");
 			
 			$args["tlo_from_datetime"] =$filters["tlo_from_datetime"];
-			$queryBuilder->where(" (tlo_datetime < :tlo_from_datetime OR tlo_datetime IS NULL) ");
+			$queryBuilder->where(" ((SELECT MAX(tlo_datetime) FROM track_logs WHERE tlo_track_id = tra_id ) < :tlo_from_datetime OR tlo_datetime IS NULL) ");
 		}
 
 		if ($filters && isset($filters["with_last_broadcast"])) {

@@ -47,6 +47,7 @@ if (!$trackId)
     $track["tra_album"] = "";
     $track["tra_genres"] = "";
     $track["tra_url"] = "";
+    $track["tra_duration"] = 0;
 
     $searchTrack = null;
 }

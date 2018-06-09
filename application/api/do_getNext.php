@@ -20,9 +20,14 @@
 if (!isset($api)) exit();
 
 require_once("engine/bo/ExceptionalProgramBo.php");
+require_once("engine/bo/JingleBo.php");
 require_once("engine/bo/TemplateProgramBo.php");
 require_once("engine/bo/TrackBo.php");
 require_once("engine/bo/TrackLogBo.php");
+
+define("LAST_HOURS_JINGLE", sys_get_temp_dir() . "/LAST_HOURS_JINGLE", true);
+define("JINGLE_AFTER_MINUTE", 57, true);
+define("JINGLE_BEFORE_MINUTE", 3, true);
 
 $now = getNow();
 $day = $now->format("w");
@@ -30,6 +35,50 @@ $time = $now->format("H:i:s");
 $date = $now->format("Y-m-d");
 
 $connection = openConnection();
+
+$minutes = intval($now->format("i"));
+
+if ($minutes > JINGLE_AFTER_MINUTE || $minutes < JINGLE_BEFORE_MINUTE) {
+
+	$hours = intval($now->format("H"));
+	if ($minutes > JINGLE_AFTER_MINUTE) {
+		$hours++;
+	}
+	if ($hours == 0) $hours = 24;
+
+	$label = "H" . ($hours < 10 ? "0" : "") . $hours;
+//	echo $label;
+//	echo "<br>";
+
+	$last = file_get_contents(LAST_HOURS_JINGLE);
+//	echo $last;
+//	echo "<br>";
+
+
+	if ($last != $label) {
+		$jingleBo = new JingleBo($connection, $config);
+
+		$ĵingles = $jingleBo->getByFilters(array("jin_type" => "hours", "jin_data" => $label));
+//		shuffle($ĵingles);
+//		echo count($ĵingles) . " jingles<br>";
+
+		if (count($ĵingles)) {
+			$jingle = $ĵingles[(rand() % count($ĵingles))];
+//			$jingle = $ĵingles[0];
+
+			$jingleTrack = array("tra_id" => -1, "tra_title" => "Jingle $label", "tra_author" => $jingle["jin_author"], "tra_album" => "Jingle", "tra_free" => 1);
+			$jingleTrack["tra_url"] = $jingle["jin_url"];
+
+			$data = array();
+			$data["track"] = $jingleTrack;
+			echo json_encode($data, JSON_NUMERIC_CHECK);
+
+			file_put_contents(LAST_HOURS_JINGLE, $label);
+
+			exit();
+		}
+	}
+}
 
 $templateProgramBo = new TemplateProgramBo($connection, $config);
 $exceptionalProgramBo = new ExceptionalProgramBo($connection, $config);

@@ -48,7 +48,9 @@ foreach($tracks as &$track) {
     if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
 	    $track["tra_album"] = utf8_decode($track["tra_album"]);
     }
-	$track["tra_genres"] = utf8_decode($track["tra_genres"]);
+    if (!json_encode($track, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE)) {
+    	$track["tra_genres"] = utf8_decode($track["tra_genres"]);
+    }
 	$track["tra_duration_time"] = $trackBo->getTimeString($track["tra_duration"]);
 }
 
