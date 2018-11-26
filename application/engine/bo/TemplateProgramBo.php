@@ -73,6 +73,11 @@ class TemplateProgramBo {
 		$queryBuilder->join("program_entries", "pen.pen_id = tpr_program_entry_id", "pen", "left");
 		$queryBuilder->addSelect("pen.*");
 
+		if ($filters && isset($filters["tpr_id"])) {
+			$args["tpr_id"] = $filters["tpr_id"];
+			$queryBuilder->where("tpr_id = :tpr_id");
+		}
+
 		if ($filters && isset($filters["tpr_day"])) {
 			$args["tpr_day"] = $filters["tpr_day"];
 			$queryBuilder->where("tpr_day = :tpr_day");
@@ -82,6 +87,8 @@ class TemplateProgramBo {
 			$args["tpr_between_time"] = $filters["tpr_between_time"];
 			$queryBuilder->where(":tpr_between_time BETWEEN tpr_start AND tpr_end ");
 		}
+
+		$queryBuilder->where("tpr_deleted = 0");
 
 		$queryBuilder->orderASCBy("tpr_day");
 		$queryBuilder->orderASCBy("tpr_start");

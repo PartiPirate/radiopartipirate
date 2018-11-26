@@ -25,8 +25,13 @@ require_once("config/database.php");
 require_once("engine/bo/TrackBo.php");
 require_once("engine/utils/DateTimeUtils.php");
 require_once("engine/utils/FormUtils.php");
+require_once("engine/utils/SessionUtils.php");
 
 session_start();
+
+if (!SessionUtils::getUserId($_SESSION)) {
+    exit();
+}
 
 xssCleanArray($_REQUEST);
 xssCleanArray($_GET);

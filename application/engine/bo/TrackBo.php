@@ -94,7 +94,7 @@ class TrackBo {
 		return null;
 	}
 
-	function getByProgramParameters($parameters, $noReplayTime) {
+	function getByProgramParameters($parameters, $noReplayTime = 0) {
 		if (!is_array($parameters)) {
 			$parameters = json_decode($parameters, true);
 		}
@@ -112,9 +112,13 @@ class TrackBo {
 			if (isset($parameters["filter"]["genre"])) {
 				$filters["tra_genres"] = $parameters["filter"]["genre"];
 			}
-			
+
 			if (isset($parameters["filter"]["genres"])) {
 				$filters["tra_like_genres"] = $parameters["filter"]["genres"];
+			}
+
+			if (isset($parameters["filter"]["notGenres"])) {
+				$filters["tra_not_like_genres"] = $parameters["filter"]["notGenres"];
 			}
 
 			if (isset($parameters["filter"]["maxDuration"])) {
@@ -131,7 +135,9 @@ class TrackBo {
 
 		$noReplayInterval = "P0DT" . $noReplayTime . "H";
 
-		$filters["tlo_from_datetime"] = getNow()->sub(new DateInterval($noReplayInterval))->format("Y-m-d H:i:s");
+		if ($noReplayInterval) {
+			$filters["tlo_from_datetime"] = getNow()->sub(new DateInterval($noReplayInterval))->format("Y-m-d H:i:s");
+		}
 
 		$filters["with_number_of_broadcasts"] = true;
 
@@ -191,6 +197,31 @@ class TrackBo {
 			else {
 				$args["tra_like_genres"] = strtolower("%" . $filters["tra_like_genres"] . "%");
 				$queryBuilder->where("LOWER(tra_genres) LIKE :tra_like_genres");
+			}
+		}
+
+		if ($filters && isset($filters["tra_not_like_genres"])) {
+			if (is_array($filters["tra_not_like_genres"])) {
+				if (count($filters["tra_not_like_genres"])) {
+					$separator = "";
+					$whereClause = " ( ";
+
+					foreach($filters["tra_not_like_genres"] as $index => $genre) {
+						$genre = strtolower("%" . $filters["tra_not_like_genres"][$index] . "%");
+						$whereClause .= $separator . " LOWER(tra_genres) NOT LIKE :tra_not_like_genres_$index ";
+						$args["tra_not_like_genres_$index"] = $genre;
+						$separator = " AND ";
+						
+					}
+	
+					$whereClause .= " ) ";
+
+					$queryBuilder->where($whereClause);
+				}
+			}
+			else {
+				$args["tra_not_like_genres"] = strtolower("%" . $filters["tra_not_like_genres"] . "%");
+				$queryBuilder->where("LOWER(tra_not_like_genres) NOT LIKE :tra_not_like_genres");
 			}
 		}
 

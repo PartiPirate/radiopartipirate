@@ -21,7 +21,7 @@ class ProgramEntryBo {
 	var $pdo = null;
 	var $config = null;
 
-	var $TABLE = "programs_entries";
+	var $TABLE = "program_entries";
 	var $ID_FIELD = "pen_id";
 
 	function __construct($pdo, $config) {
@@ -70,6 +70,13 @@ class ProgramEntryBo {
 		$queryBuilder->select($this->TABLE);
 		$queryBuilder->setDistinct();
 		$queryBuilder->addSelect($this->TABLE . ".*");
+
+		if ($filters && isset($filters["pen_id"])) {
+			$args["pen_id"] = $filters["pen_id"];
+			$queryBuilder->where("pen_id = :pen_id");
+		}
+
+		$queryBuilder->where("pen_deleted = 0");
 
 		$query = $queryBuilder->constructRequest();
 		$statement = $this->pdo->prepare($query);

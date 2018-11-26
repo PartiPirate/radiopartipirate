@@ -21,12 +21,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once("config/database.php");
+include_once("header.php");
 require_once("engine/bo/TrackBo.php");
-require_once("engine/utils/DateTimeUtils.php");
-require_once("engine/utils/FormUtils.php");
 
-session_start();
+if (!SessionUtils::getUserId($_SESSION)) {
+    exit();
+}
+
 
 xssCleanArray($_REQUEST);
 xssCleanArray($_GET);
@@ -38,11 +39,7 @@ $trackBo = new TrackBo($connection, $config);
 
 $tracks = $trackBo->getByFilters(array("with_last_broadcast" => true, "with_number_of_broadcasts" => true));
 
-?><!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <style>
+?>    <style>
 table tbody tr:nth-child(even) {
     background: #CCC
 }
@@ -54,11 +51,7 @@ table tbody tr:nth-child(odd) {
     </style>
 	<link rel="stylesheet" type="text/css" media="all" href="assets/css/radio.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="assets/css/datatables.min.css" />
-	<script src="assets/js/jquery-3.3.1.min.js"></script>
 	<script src="assets/js/datatables.min.js"></script>
-</head>    
-<body>
-<img src="https://media.discordapp.net/attachments/361533120060850178/370296433431150602/banniereradioPPV18.png" style="width: 100px;"><br>
 
 <a href="track.php?id=0" class="add-track-link">Ajouter une piste</a><br>
 <br>
@@ -126,7 +119,10 @@ table tbody tr:nth-child(odd) {
 
 <div id="track-div"></div>
 
-<script src="assets/js/perpage/tracks.js"></script>
+<div class="lastDiv"></div>
 
-</body>    
+<script type="text/javascript">
+</script>
+<?php include("footer.php");?>
+</body>
 </html>

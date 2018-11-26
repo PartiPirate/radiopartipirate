@@ -73,6 +73,11 @@ class ExceptionalProgramBo {
 		$queryBuilder->join("program_entries", "pen.pen_id = epr_program_entry_id", "pen", "left");
 		$queryBuilder->addSelect("pen.*");
 
+		if ($filters && isset($filters["epr_id"])) {
+			$args["epr_id"] = $filters["epr_id"];
+			$queryBuilder->where("epr_id = :epr_id");
+		}
+
 		if ($filters && isset($filters["epr_date"])) {
 			$args["epr_date"] = $filters["epr_date"];
 			$queryBuilder->where("epr_date = :epr_date");
@@ -82,6 +87,8 @@ class ExceptionalProgramBo {
 			$args["epr_between_time"] = $filters["epr_between_time"];
 			$queryBuilder->where(":epr_between_time BETWEEN epr_start AND epr_end ");
 		}
+
+		$queryBuilder->where("epr_deleted = 0");
 
 		$query = $queryBuilder->constructRequest();
 		$statement = $this->pdo->prepare($query);
