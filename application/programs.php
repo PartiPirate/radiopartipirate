@@ -74,7 +74,7 @@ foreach($programEntries as $programIndex => $programEntry) {
                 <td style="width: 10%;"><?php echo $programEntry["pen_class"]; ?></td>
                 <td style="width: 30%;"><?php echo $programEntry["pen_parameters"]; ?></td>
                 <td style="width: 10%;"><?php echo $programEntry["pen_number_of_tracks"]; ?></td>
-                <td>Editer <button data-id="<?php echo $programEntry["pen_id"]; ?>" class="btn btn-sm btn-danger to-delete-program-btn">Supprimer</button></td>
+                <td><button data-id="<?php echo $programEntry["pen_id"]; ?>" class="btn btn-sm btn-default to-update-program-btn">Editer</button> <button data-id="<?php echo $programEntry["pen_id"]; ?>" class="btn btn-sm btn-danger to-delete-program-btn">Supprimer</button></td>
             </tr>
     <?php        
         }
@@ -84,13 +84,33 @@ foreach($programEntries as $programIndex => $programEntry) {
     </table>
 </div>
 
+<button class="btn btn-sm btn-success to-add-program-btn">Ajouter</button>
+
 <div class="program-deleter" style="display: none;">
     <form action="do_deleteProgramEntry.php">
         <input id="pen_id" type="numeric" value="">
         <button class="btn btn-sm btn-danger delete-program-btn">Supprimer</button>
     </form>
 </div>
-    
+
+<div class="programer" style="display: none;">
+    <form action="do_updateProgram.php">
+        <input id="pen_id" type="numeric" value="">
+        <input id="pen_title" type="text" value="">
+        <select id="pen_class">
+            <option value="pirate">Pirate</option>
+            <option value="electro">Electro</option>
+            <option value="rock">Rock</option>
+        </select>
+        <br>
+        <textarea id="pen_parameters" style="width: 100%;"></textarea>
+        <br>
+        <button class="btn btn-sm btn-success update-program-btn">Mettre à jour</button>
+    </form>
+</div>
+
+
+
 </div>
 <div class="lastDiv"></div>
 

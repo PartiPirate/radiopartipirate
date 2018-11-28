@@ -82,9 +82,9 @@ $now = $now->format("Y-m-d");
 ?>
         <tr data-json="<?php echo str_replace("\"", "&quot;", json_encode($templateProgram)); ?>">
             <td style="width: 15%;"><?php echo $templateProgram["tpr_id"]; ?></td>
-            <td style="width: 15%;"><?php echo lang("day_" . $templateProgram["tpr_day"]); ?></td>
-            <td style="width: 15%;"><?php echo $templateProgram["tpr_start"]; ?></td>
-            <td style="width: 15%;"><?php echo $templateProgram["tpr_end"]; ?></td>
+            <td style="width: 10%;"><?php echo lang("day_" . $templateProgram["tpr_day"]); ?></td>
+            <td style="width: 10%;"><?php echo $templateProgram["tpr_start"]; ?></td>
+            <td style="width: 10%;"><?php echo $templateProgram["tpr_end"]; ?></td>
             <td style="width: 15%;"><a href="programs.php?id=<?php echo $templateProgram["tpr_program_entry_id"]; ?>"><?php echo $templateProgram["pen_title"]; ?></a></td>
             <td><button data-id="<?php echo $templateProgram["tpr_id"]; ?>" class="btn btn-sm btn-default to-update-template-btn">Editer</button> <button data-id="<?php echo $templateProgram["tpr_id"]; ?>" class="btn btn-sm btn-default to-split-btn">Split</button> <button data-id="<?php echo $templateProgram["tpr_id"]; ?>" class="btn btn-sm btn-danger to-delete-template-btn">Supprimer</button> <a href="programs.php?id=<?php echo $templateProgram["tpr_program_entry_id"]; ?>&action=edit" class="btn btn-sm btn-default">Editer le programme</a></td>
         </tr>
@@ -119,9 +119,9 @@ $now = $now->format("Y-m-d");
 ?>
         <tr data-json="<?php echo str_replace("\"", "&quot;", json_encode($exceptionalProgram)); ?>">
             <td style="width: 15%;"><?php echo $exceptionalProgram["epr_id"]; ?></td>
-            <td style="width: 15%;"><?php echo $exceptionalProgram["epr_date"]; ?></td>
-            <td style="width: 15%;"><?php echo $exceptionalProgram["epr_start"]; ?></td>
-            <td style="width: 15%;"><?php echo $exceptionalProgram["epr_end"]; ?></td>
+            <td style="width: 10%;"><?php echo $exceptionalProgram["epr_date"]; ?></td>
+            <td style="width: 10%;"><?php echo $exceptionalProgram["epr_start"]; ?></td>
+            <td style="width: 10%;"><?php echo $exceptionalProgram["epr_end"]; ?></td>
             <td style="width: 15%;"><a href="programs.php?id=<?php echo $exceptionalProgram["epr_program_entry_id"]; ?>"><?php echo $exceptionalProgram["pen_title"]; ?></a></td>
             <td><button data-id="<?php echo $exceptionalProgram["epr_id"]; ?>" class="btn btn-sm btn-default to-update-exceptional-btn">Editer</button> <button data-id="<?php echo $exceptionalProgram["epr_id"]; ?>" class="btn btn-sm btn-danger to-delete-exceptional-btn">Supprimer</button> <a href="programs.php?id=<?php echo $exceptionalProgram["epr_program_entry_id"]; ?>&action=edit" class="btn btn-sm btn-default">Editer le programme</a></td>
         </tr>
@@ -156,9 +156,9 @@ $now = $now->format("Y-m-d");
 ?>
         <tr data-json="<?php echo str_replace("\"", "&quot;", json_encode($exceptionalProgram)); ?>">
             <td style="width: 15%;"><?php echo $exceptionalProgram["epr_id"]; ?></td>
-            <td style="width: 15%;"><?php echo $exceptionalProgram["epr_date"]; ?></td>
-            <td style="width: 15%;"><?php echo $exceptionalProgram["epr_start"]; ?></td>
-            <td style="width: 15%;"><?php echo $exceptionalProgram["epr_end"]; ?></td>
+            <td style="width: 10%;"><?php echo $exceptionalProgram["epr_date"]; ?></td>
+            <td style="width: 10%;"><?php echo $exceptionalProgram["epr_start"]; ?></td>
+            <td style="width: 10%;"><?php echo $exceptionalProgram["epr_end"]; ?></td>
             <td style="width: 15%;"><a href="programs.php?id=<?php echo $exceptionalProgram["epr_program_entry_id"]; ?>"><?php echo $exceptionalProgram["pen_title"]; ?></a></td>
             <td><button data-id="<?php echo $exceptionalProgram["epr_id"]; ?>" class="btn btn-sm btn-default to-update-exceptional-btn">Editer</button> <button data-id="<?php echo $exceptionalProgram["epr_id"]; ?>" class="btn btn-sm btn-danger to-delete-exceptional-btn">Supprimer</button> <a href="programs.php?id=<?php echo $exceptionalProgram["epr_program_entry_id"]; ?>&action=edit" class="btn btn-sm btn-default">Editer le programme</a></td>
         </tr>
