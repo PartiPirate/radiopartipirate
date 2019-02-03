@@ -1,22 +1,27 @@
 <?php /*
-	Copyright 2014-2015 Cédric Levieux, Jérémy Collot, ArmagNet
+	Copyright 2014-2019 Cédric Levieux, Parti Pirate
 
-	This file is part of OpenTweetBar.
+	This file is part of RadioPartiPirate.
 
-    OpenTweetBar is free software: you can redistribute it and/or modify
+    RadioPartiPirate is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    OpenTweetBar is distributed in the hope that it will be useful,
+    RadioPartiPirate is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with OpenTweetBar.  If not, see <http://www.gnu.org/licenses/>.
+    along with RadioPartiPirate.  If not, see <http://www.gnu.org/licenses/>.
 */
 ?>
+
+<div class="watermark">
+    <div class="watermark-inside"></div>    
+</div>
+
 <nav id="footer" class="navbar navbar-inverse navbar-bottom" role="navigation">
 
 	<ul class="nav navbar-nav">
