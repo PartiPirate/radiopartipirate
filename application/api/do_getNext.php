@@ -111,6 +111,15 @@ $program = $program[0];
 
 $data["program"] = $program;
 
+/*
+if (rand(0, 1)) {
+	$program["pen_parameters"] = array("track" => 6714);
+}
+else {
+	$program["pen_parameters"] = array("track" => 6622);
+}
+*/
+
 $tracks = $trackBo->getByProgramParameters($program["pen_parameters"], 4);
 
 $data["numberOfTracks"] = count($tracks);
@@ -136,6 +145,8 @@ if (count($tracks)) {
 	    $track["tra_album"] = utf8_decode($track["tra_album"]);
     }
 	$track["tra_duration_time"] = $trackBo->getTimeString($track["tra_duration"]);
+
+//	$track["tra_finish_time"] = 30;
 
 	$data["track"] = $track;
 

@@ -1,5 +1,5 @@
 <?php /*
-	Copyright 2018 Cédric Levieux, Parti Pirate
+	Copyright 2018-2019 Cédric Levieux, Parti Pirate
 
 	This file is part of Radio Parti Pirate.
 
@@ -266,6 +266,11 @@ class TrackBo {
 			$queryBuilder->orderASCBy("tra_number_of_broadcasts");
 		}
 
+		if ($filters && isset($filters["with_deleted"])) {
+		}
+		else {
+			$queryBuilder->where("tra_deleted = 0");
+		}
 
 		$query = $queryBuilder->constructRequest();
 		$statement = $this->pdo->prepare($query);
