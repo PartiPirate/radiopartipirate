@@ -39,8 +39,8 @@ $connection = openConnection();
 $trackBo = new TrackBo($connection, $config);
 
 $track = $trackBo->getById($trackId);
-
-$trackBo->delete($track);
+$track["tra_deleted"] = 1;
+$trackBo->save($track);
 
 header('Location: tracks.php');
 

@@ -85,13 +85,15 @@ $track["tra_duration_time"] = $trackBo->getTimeString($track["tra_duration"]);
 <br>
 <?php } ?>
 <form action="do_saveTrack.php" method="post">
-    <input type="hidden" name="id" value="<?php echo $track["tra_id"]; ?>">
-Titre :  <input type="value" name="title"  value="<?php echo $track["tra_title"]; ?>">  <?php if ($searchTrack && $track["tra_title"]  != $searchTrack["tra_title"])  { echo $searchTrack["tra_title"];  } ?> <br>
-Auteur : <input type="value" name="author" value="<?php echo $track["tra_author"]; ?>"> <?php if ($searchTrack && $track["tra_author"] != $searchTrack["tra_author"]) { echo $searchTrack["tra_author"]; } ?> <br>
-Album :  <input type="value" name="album"  value="<?php echo $track["tra_album"]; ?>">  <?php if ($searchTrack && $track["tra_album"]  != $searchTrack["tra_album"])  { echo $searchTrack["tra_album"];  } ?> <br>
-Genres : <input type="value" name="genres" value="<?php echo $track["tra_genres"]; ?>"> <?php if ($searchTrack && $track["tra_genres"] != $searchTrack["tra_genres"]) { echo $searchTrack["tra_genres"]; } ?> <br>
-URL :    <input type="value" name="url"    value="<?php echo $track["tra_url"]; ?>"> <br>
-Durée :  <?php echo $track["tra_duration_time"]; ?> <br>
+         <input type="hidden" name="id"    value="<?=$track["tra_id"]?>">
+Titre :  <input type="value" name="title"  value="<?=$track["tra_title"]?>">  <?php if ($searchTrack && $track["tra_title"]  != $searchTrack["tra_title"])  { echo $searchTrack["tra_title"];  } ?> <br>
+Auteur : <input type="value" name="author" value="<?=$track["tra_author"]?>"> <?php if ($searchTrack && $track["tra_author"] != $searchTrack["tra_author"]) { echo $searchTrack["tra_author"]; } ?> <br>
+Album :  <input type="value" name="album"  value="<?=$track["tra_album"]?>">  <?php if ($searchTrack && $track["tra_album"]  != $searchTrack["tra_album"])  { echo $searchTrack["tra_album"];  } ?> <br>
+Genres : <input type="value" name="genres" value="<?=$track["tra_genres"]?>"> <?php if ($searchTrack && $track["tra_genres"] != $searchTrack["tra_genres"]) { echo $searchTrack["tra_genres"]; } ?> <br>
+URL :    <input type="value" name="url"    value="<?=$track["tra_url"]?>"> <br>
+Durée :  <?=$track["tra_duration_time"]?> <br>
+Start :  <input type="value" name="start"  value="<?=$track["tra_start_time"]?>"> <br>
+Finish : <input type="value" name="finish" value="<?=$track["tra_finish_time"]?>"> <br>
     <button id="save-track-button" type="submit">Mise à jour</button>
 
 <?php 
@@ -99,7 +101,7 @@ Durée :  <?php echo $track["tra_duration_time"]; ?> <br>
     $embedUrl = str_replace("/watch?v=", "/embed/", $embedUrl);
 ?>
 <div>
-<iframe width="500" height="200" src="<?php echo $embedUrl; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="200" src="<?=$embedUrl?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 </form>

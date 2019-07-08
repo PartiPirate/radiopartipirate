@@ -64,6 +64,8 @@ table tbody tr:nth-child(odd) {
             <th>Album</th>
             <th>Genres</th>
             <th>Durée</th>
+            <th>Début (en s)</th>
+            <th>Fin (en s)</th>
             <th style="width: 140px;">Dernière diffusion</th>
             <th style="">Nombre diffusions</th>
             <th>Actions</th>
@@ -98,6 +100,8 @@ table tbody tr:nth-child(odd) {
             <th>Album</th>
             <th>Genres</th>
             <th>Durée</th>
+            <th>Début (en s)</th>
+            <th>Fin (en s)</th>
             <th>Dernière diffusion</th>
             <th>Nombre diffusions</th>
             <th>Actions</th>

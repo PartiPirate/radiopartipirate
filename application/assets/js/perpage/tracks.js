@@ -85,6 +85,8 @@ $(function() {
             { data: 'tra_album' },
             { data: 'tra_genres' },
             { data: 'tra_duration_time', className: "text-right" },
+            { data: 'tra_start_time', className: "text-right" },
+            { data: 'tra_finish_time', className: "text-right" },
             { data: 'tra_last_broadcast', className: "text-right" },
             { data: 'tra_number_of_broadcasts', className: "text-right" },
             { data: null, 

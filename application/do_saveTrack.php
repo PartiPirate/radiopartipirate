@@ -50,6 +50,16 @@ $track["tra_album"] = ($_REQUEST["album"]);
 $track["tra_genres"] = ($_REQUEST["genres"]);
 $track["tra_url"] = $_REQUEST["url"];
 
+$track["tra_start_time"] = null;
+$track["tra_finish_time"] = null;
+
+if (isset($_REQUEST["start"]) && $_REQUEST["start"]) {
+    $track["tra_start_time"] = $_REQUEST["start"];
+}
+if (isset($_REQUEST["finish"]) && $_REQUEST["finish"]) {
+    $track["tra_finish_time"] = $_REQUEST["finish"];
+}
+
 $trackBo->save($track);
 
 header('Location: track.php?id=' . $track["tra_id"]);
