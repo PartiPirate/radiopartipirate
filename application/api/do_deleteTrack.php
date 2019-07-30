@@ -32,7 +32,10 @@ $track = $trackBo->getByUrl($_REQUEST["url"]);
 if ($track) {
 	$data["status"] = true;
 
+    $now = getNow();
     $track["tra_deleted"] = 1;
+    $track["tra_deletion_date"] = $now->format('Y-m-d H:i:s');
+
     $trackBo->update($track);
 }
 else {
